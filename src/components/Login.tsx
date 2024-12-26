@@ -1,9 +1,14 @@
 import { useEffect, useRef } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_API_URL;
 
   const handleLogin = async() => {
@@ -16,6 +21,8 @@ const Login = () => {
       },
       { withCredentials: true });
       console.log(user);
+      dispatch(addUser(user?.data?.user));
+      navigate("/");
     } catch(e) {
       console.error(e);
     }
@@ -30,7 +37,7 @@ const Login = () => {
     }
   }, []);
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center mt-[8rem]">
       <div className="card bg-base-200 w-96 shadow-xl">
         <div className="card-body">
           <label className="form-control w-full max-w-xs">

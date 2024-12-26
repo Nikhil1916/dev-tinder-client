@@ -4,5 +4,9 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" },
   ],
-  "exclude": ["src/vite-env.d.ts"]
+  "exclude": ["src/vite-env.d.ts"],
+  "compilerOptions": {
+    "noUnusedLocals": false, // Disable unused local variable checks
+    "noUnusedParameters": false // Disable unused parameter checks
+  }
 }

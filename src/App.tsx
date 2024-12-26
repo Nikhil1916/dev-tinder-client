@@ -3,8 +3,6 @@ import "./App.css";
 import Body from "./components/Body";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-
-
 function App() {
   return (
     <BrowserRouter basename="/">
