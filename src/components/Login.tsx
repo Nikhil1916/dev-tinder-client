@@ -1,11 +1,24 @@
 import { useEffect, useRef } from "react";
+import axios from "axios";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   const handleLogin = async() => {
-    console.log(import.meta.env.VITE_API_URL);
+    try {
+      //add error handling via zod or validator 
+      //to do add a common package for test payloads
+      const user = await axios.post(BASE_URL+"/auth/login",{
+        emailId: emailRef?.current?.value,
+        password: passwordRef?.current?.value
+      },
+      { withCredentials: true });
+      console.log(user);
+    } catch(e) {
+      console.error(e);
+    }
   }
 
   useEffect(() => {
