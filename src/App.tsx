@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import Feed from "./components/Feed";
 function App() {
   return (
     <Provider store={appStore}>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Body/>}>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/profile" element={<Profile/>}></Route>
+          <Route path="/feed" element={<Feed/>}></Route>
         </Route>
       </Routes>
       <ToastContainer position="bottom-left" />
