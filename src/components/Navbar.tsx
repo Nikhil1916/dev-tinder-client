@@ -1,8 +1,25 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { User } from "../utils/interfaces";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
+import { toastHelper } from "../utils/toast";
+import { toastEnum } from "../utils/enums";
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user: User | null = useSelector((store: any) => store.user);
+  const handleLogout = async() => {
+    try {
+      await axios.post(BASE_URL + "/auth/logout", {}, { withCredentials: true });
+      dispatch(removeUser(null));
+      navigate("/login");
+      toastHelper("User logout successful", toastEnum.SUCCESS);
+    } catch (err:any) {
+      toastHelper(err?.message,toastEnum.ERROR);
+    }
+  }
   if(!user) {
     return null;
   }
@@ -14,13 +31,6 @@ const Navbar = () => {
           </Link>
       </div>
       <div className="flex-none gap-2">
-        {/* <div className="form-control">
-        <input
-          type="text"
-          placeholder="Search"
-          className="input input-bordered w-24 md:w-auto"
-        />
-      </div> */}
         <div className="dropdown dropdown-end mr-5">
           <div
             tabIndex={0}
@@ -51,7 +61,7 @@ const Navbar = () => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={handleLogout}>Logout</a>
             </li>
           </ul>
         </div>

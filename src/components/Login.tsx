@@ -5,13 +5,13 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toastHelper } from "../utils/toast";
 import { toastEnum } from "../utils/enums";
+import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_URL;
 
   const handleLogin = async() => {
     try {

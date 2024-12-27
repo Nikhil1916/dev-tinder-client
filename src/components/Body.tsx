@@ -7,19 +7,23 @@ import { useEffect } from 'react';
 import { toastHelper } from '../utils/toast';
 import { toastEnum } from '../utils/enums';
 import { addUser } from '../utils/userSlice';
+import { BASE_URL } from '../utils/constants';
+import { useLocation } from 'react-router-dom';
 
 const Body = () => {
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation()
   const userData = useSelector((store:any) => store?.user);
   const isUserLoggedIn = async() => {
     try {
       const user = await axios.get(BASE_URL+"/profile/view",{
         withCredentials: true
       });
-      console.log(user);
       dispatch(addUser(user?.data));
+      if(location.pathname == "/login") {
+        navigate("/");
+      }
     } catch(e:any) {
       navigate("/login");
       toastHelper(e?.response?.data, toastEnum.ERROR);
