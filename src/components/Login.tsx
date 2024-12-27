@@ -3,6 +3,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import { toastHelper } from "../utils/toast";
+import { toastEnum } from "../utils/enums";
 
 const Login = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -20,10 +22,11 @@ const Login = () => {
         password: passwordRef?.current?.value
       },
       { withCredentials: true });
-      console.log(user);
+      toastHelper(user?.data?.user?.firstName+" "+user?.data?.user?.lastName+ " logged in", toastEnum.SUCCESS);
       dispatch(addUser(user?.data?.user));
       navigate("/");
     } catch(e) {
+
       console.error(e);
     }
   }
