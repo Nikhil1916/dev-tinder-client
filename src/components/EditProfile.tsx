@@ -25,17 +25,13 @@ const EditProfile = ({ user }: { user: any }) => {
         gender,
         about,
       });
-
-      const config = {
-        method: "put",
-        maxBodyLength: Infinity,
-        url: "http://localhost:3000/profile/edit",
-        data: data,
-      };
-
       const res = await axios.put(BASE_URL+"/profile/edit", data, {
-        withCredentials:true
-      });
+        withCredentials:true,
+        headers: {
+            'Content-Type': 'application/json', // Explicitly set the content type
+          },
+      },
+    );
       dispatch(addUser(res?.data?.data));
       toastHelper("Profile saved successfully.", toastEnum.SUCCESS);
     } catch (err: any) {
