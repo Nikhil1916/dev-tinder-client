@@ -21,7 +21,7 @@ const EditProfile = ({ user }: { user: any }) => {
         firstName,
         lastName,
         photoUrl,
-        age,
+        age:age ? +age : age,
         gender,
         about,
       });
@@ -35,13 +35,14 @@ const EditProfile = ({ user }: { user: any }) => {
       dispatch(addUser(res?.data?.data));
       toastHelper("Profile saved successfully.", toastEnum.SUCCESS);
     } catch (err: any) {
-      toastHelper(err?.response?.data, toastEnum.ERROR);
+      console.log(err);
+      toastHelper(err?.response?.data?.error || err?.error || err?.response?.data?.err, toastEnum.ERROR);
     }
   };
 
   return (
     <>
-      <div className="flex justify-center my-10">
+      <div className="flex flex-col my-10 md:flex-row justify-center">
         <div className="flex justify-center mx-10">
           <div className="card bg-base-300 w-96 shadow-xl">
             <div className="card-body">
@@ -85,7 +86,7 @@ const EditProfile = ({ user }: { user: any }) => {
                     <span className="label-text">Age:</span>
                   </div>
                   <input
-                    type="text"
+                    type="number"
                     value={age}
                     className="input input-bordered w-full max-w-xs"
                     onChange={(e) => setAge(e.target.value)}
@@ -122,7 +123,7 @@ const EditProfile = ({ user }: { user: any }) => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="hidden md:block">
           <UserCard
             user={{ firstName, lastName, photoUrl, age, gender, about }}
             isFeed={false}
