@@ -13,7 +13,7 @@ const Connections = () => {
      setConnections(res?.data?.data);
     } catch (err:any) {
       // Handle Error Case
-      toastHelper(err?.message,toastEnum.ERROR);
+      toastHelper(err?.message, toastEnum.ERROR);
     }
   };
 
@@ -35,7 +35,7 @@ const Connections = () => {
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Connections</h1>
 
-      {connections.map((connection) => {
+      {connections?.map((connection:any) => {
         const { firstName, lastName, photoUrl, age, gender, about ,_id} =
           connection;
 
