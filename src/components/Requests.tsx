@@ -17,6 +17,7 @@ const Requests = () => {
       setRequests(res?.data?.data);
       setLoader(false);
     } catch (err) {
+      setLoader(false);
         console.log(err);
     }
   };
@@ -24,6 +25,7 @@ const Requests = () => {
   
   const reviewRequest = async (status:string, _id:string) => {
     try {
+      setLoader(true);
       await axios.post(
         BASE_URL + "/request/review/" + status + "/" + _id,
         {},
@@ -32,6 +34,7 @@ const Requests = () => {
       fetchRequests();
     } catch (err:any) {
       toastHelper(err?.response?.data?.error, toastEnum.ERROR);
+      setLoader(false);
     }
   };
 

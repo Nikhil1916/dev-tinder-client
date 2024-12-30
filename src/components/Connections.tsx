@@ -3,13 +3,17 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { toastHelper } from "../utils/toast";
 import { toastEnum } from "../utils/enums";
+import Schimmer from "./Schimmer";
 const Connections = () => {
   const [connections, setConnections] = useState([]);
+  const [loader, setLoader] = useState(false);
   const fetchConnections = async () => {
     try {
+      setLoader(true);
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
+    setLoader(false);
      setConnections(res?.data?.data);
     } catch (err:any) {
       // Handle Error Case
@@ -20,6 +24,19 @@ const Connections = () => {
   useEffect(() => {
     fetchConnections();
   }, []);
+
+
+  if(loader) {
+    return (
+      <div>
+        {
+          [1,2,3,4,5]?.map((_)=>{
+            return <Schimmer key={_} />
+          })
+        }
+      </div>
+    )
+  }
 
   if (!connections) return;
 
