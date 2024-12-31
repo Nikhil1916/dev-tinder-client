@@ -11,9 +11,9 @@ const EditProfile = ({ user }: { user: any }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-  const [age, setAge] = useState(user.age);
-  const [gender, setGender] = useState(user.gender);
-  const [about, setAbout] = useState(user.about);
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [about, setAbout] = useState(user.about || "");
   const dispatch = useDispatch();
   const saveProfile = async () => {
     try {
@@ -86,7 +86,7 @@ const EditProfile = ({ user }: { user: any }) => {
                     <span className="label-text">Age:</span>
                   </div>
                   <input
-                    type="number"
+                    type="text"
                     value={age}
                     className="input input-bordered w-full max-w-xs"
                     onChange={(e) => setAge(e.target.value)}
