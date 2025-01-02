@@ -16,6 +16,7 @@ const Navbar = () => {
       dispatch(removeUser(null));
       navigate("/login");
       toastHelper("User logout successful", toastEnum.SUCCESS);
+      window.location.reload();
     } catch (err:any) {
       toastHelper(err?.message,toastEnum.ERROR);
     }

@@ -1,7 +1,7 @@
 import Navbar from './Navbar'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Footer from './Footer'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { toastHelper } from '../utils/toast';
@@ -13,10 +13,10 @@ import { useLocation } from 'react-router-dom';
 const Body = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation()
-  const userData = useSelector((store:any) => store?.user);
+  const location = useLocation();
   const isUserLoggedIn = async() => {
     try {
+      // console.log(document.cookie);
       const user = await axios.get(BASE_URL+"/profile/view",{
         withCredentials: true
       });
@@ -31,7 +31,10 @@ const Body = () => {
   }
 
   useEffect(()=>{
-    isUserLoggedIn();
+    const cookieString = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="));
+    if(cookieString) isUserLoggedIn();
   },[])
 
   return (
