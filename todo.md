@@ -3,4 +3,5 @@
 - see a formik library for creating forms dynamically from json
 - add error handling via zod or validator 
 - to do add a common package for test payloads
-- call feed api when lenght of users is decreasing 
+- call feed api when lenght of users is decreasing
+- add custom hooks for calling api so each component is just doing its work instead of calling data as well
