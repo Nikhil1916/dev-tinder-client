@@ -6,10 +6,10 @@ export const userSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    addUser:(state, action) => {
+    addUser:(_state, action) => {
         return action.payload
     },
-    removeUser:(state, action) => {
+    removeUser:() => {
         return null;
     }
   },

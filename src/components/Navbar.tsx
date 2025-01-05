@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = async() => {
     try {
       await axios.post(BASE_URL + "/auth/logout", {}, { withCredentials: true });
-      dispatch(removeUser(null));
+      dispatch(removeUser());
       navigate("/login");
       toastHelper("User logout successful", toastEnum.SUCCESS);
       window.location.reload();
