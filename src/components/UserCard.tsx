@@ -24,7 +24,7 @@ const UserCard = ({ user, isFeed = true }: { user: any; isFeed: boolean }) => {
     <div
       className={"card bg-base-300 w-96 shadow-xl" + (isFeed ? "" : " pt-4")}
     >
-      <figure>
+      <figure className="p-2">
         <img src={photoUrl} alt="photo" />
       </figure>
       <div className="card-body">
