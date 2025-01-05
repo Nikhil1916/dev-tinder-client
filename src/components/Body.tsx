@@ -16,7 +16,6 @@ const Body = () => {
   const location = useLocation();
   const isUserLoggedIn = async() => {
     try {
-      // console.log(document.cookie);
       const user = await axios.get(BASE_URL+"/profile/view",{
         withCredentials: true
       });
@@ -31,10 +30,12 @@ const Body = () => {
   }
 
   useEffect(()=>{
-    const cookieString = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="));
-    if(cookieString) isUserLoggedIn();
+    // const cookieString = document.cookie
+    //     .split("; ")
+    //     .find((row) => row.startsWith("token="));
+    // if(cookieString) isUserLoggedIn();
+    // else navigate("/login");
+    isUserLoggedIn();
   },[])
 
   return (
