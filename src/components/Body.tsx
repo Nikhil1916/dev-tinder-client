@@ -30,12 +30,11 @@ const Body = () => {
   }
 
   useEffect(()=>{
-    // const cookieString = document.cookie
-    //     .split("; ")
-    //     .find((row) => row.startsWith("token="));
-    // if(cookieString) isUserLoggedIn();
-    // else navigate("/login");
-    isUserLoggedIn();
+    const cookieString = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="));
+    if(cookieString) isUserLoggedIn();
+    else navigate("/login");
   },[])
 
   return (
