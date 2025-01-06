@@ -4,8 +4,10 @@ import UserCard from "./UserCard";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { addFeed } from "../utils/feedSlice";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
+  const navigate = useNavigate();
   const feed = useSelector((store:any)=>store?.feed);
   const [loading,setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -13,14 +15,17 @@ const Feed = () => {
     const res = await axios.get(BASE_URL + "/user/feed", {
       withCredentials: true,
     });
-    console.log(res);
     setLoading(false);
     dispatch(addFeed(res?.data?.data));
   }
 
-  useEffect(()=>{
-    getFeed();
-  },[]);
+  useEffect(() => {
+    const cookieString = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="));
+    if (cookieString) getFeed();
+    else navigate("/login");
+  }, []);
 
   if(!feed || feed.length == 0) {
     return <h1 className="flex justify-center my-10">No new users founds!</h1>;
