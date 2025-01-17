@@ -1,2 +1,6 @@
-- DEPLOYED ON AWS: https://www.devxproject.com
-- BACKEND URL: https://www.devxproject.com/api
+- DEPLOYED ON AWS
+- Client : https://www.devxproject.com
+- Server: https://www.devxproject.com/api
+## STACKS:
+- React, Express, Mongodb
+
