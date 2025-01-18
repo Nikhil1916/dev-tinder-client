@@ -27,10 +27,6 @@ const Feed = () => {
     else navigate("/login");
   }, []);
 
-  if(!feed || feed.length == 0) {
-    return <h1 className="flex justify-center my-10">No new users founds!</h1>;
-  }
-
   if(loading) {
     return (
       <div className="flex justify-center mt-4">
@@ -53,6 +49,11 @@ const Feed = () => {
       </div>
     );
   }
+  
+  if(!feed || feed.length == 0) {
+    return <h1 className="flex justify-center my-10">No new users founds!</h1>;
+  }
+
 
   return (
     feed && (
